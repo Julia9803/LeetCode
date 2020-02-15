@@ -18,7 +18,7 @@ A solution set is:
 ]
 ```
 
-#### Answer
+#### Solution:
 
 1st sort the list, then iterate each one, except for duplicate ones. 
 
