@@ -1,8 +1,10 @@
-### 141. Linked List Cycle
+### 142. Linked List Cycle II
 
-Given a linked list, determine if it has a cycle in it.
+Given a linked list, return the node where the cycle begins. If there is no cycle, return `null`.
 
 To represent a cycle in the given linked list, we use an integer `pos` which represents the position (0-indexed) in the linked list where tail connects to. If `pos` is `-1`, then there is no cycle in the linked list.
+
+**Note:** Do not modify the linked list.
 
  
 
@@ -10,7 +12,7 @@ To represent a cycle in the given linked list, we use an integer `pos` which rep
 
 ```
 Input: head = [3,2,0,-4], pos = 1
-Output: true
+Output: tail connects to node index 1
 Explanation: There is a cycle in the linked list, where tail connects to the second node.
 ```
 
@@ -20,7 +22,7 @@ Explanation: There is a cycle in the linked list, where tail connects to the sec
 
 ```
 Input: head = [1,2], pos = 0
-Output: true
+Output: tail connects to node index 0
 Explanation: There is a cycle in the linked list, where tail connects to the first node.
 ```
 
@@ -30,7 +32,7 @@ Explanation: There is a cycle in the linked list, where tail connects to the fir
 
 ```
 Input: head = [1], pos = -1
-Output: false
+Output: no cycle
 Explanation: There is no cycle in the linked list.
 ```
 
@@ -38,9 +40,8 @@ Explanation: There is no cycle in the linked list.
 
  
 
-**Follow up:**
-
-Can you solve it using *O(1)* (i.e. constant) memory?
+**Follow-up**:
+Can you solve it without using extra space?
 
 #### Solution:
 
@@ -57,47 +58,29 @@ Can you solve it using *O(1)* (i.e. constant) memory?
  * }
  */
 public class Solution {
-    public boolean hasCycle(ListNode head) {
-        // hashset
-        Set<ListNode> set = new HashSet<>();
-        while(head != null) {
-            if(set.contains(head)) return true;
-            else set.add(head);
-            head = head.next;
-        }
-        return false;
-    }
-}
-```
-
-```java
-/**
- * Definition for singly-linked list.
- * class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
- * }
- */
-public class Solution {
-    public boolean hasCycle(ListNode head) {
-        // two pointers
-        if(head == null) return false;
+    /** a + b + kN = 2 * (a + b), k = 0,1,2...  when slow meets fast
+     * a + b = kN
+     * N - b = a - (k-1)N slow will meet slow2
+    **/
+    public ListNode detectCycle(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
-        while(fast.next != null && fast.next.next != null) {
+        ListNode slow2 = head;
+        while(fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
             if(slow == fast) {
-                return true;
+                while(slow != slow2) {
+                    slow2 = slow2.next;
+                    slow = slow.next;
+                }
+                return slow;
             }
         }
-        return false;
+        return null;
     }
 }
 ```
 
 ##### Date 2020.2.20
+
