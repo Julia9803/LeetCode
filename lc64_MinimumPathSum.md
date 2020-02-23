@@ -37,4 +37,4 @@ class Solution {
 }
 ```
 
-##### Date 2020.2.21
+##### Date 2020.
