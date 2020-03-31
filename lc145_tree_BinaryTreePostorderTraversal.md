@@ -47,4 +47,36 @@ class Solution {
 }
 ```
 
-##### Date 2020.3.30
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {   
+    // 2. iterative
+    public List<Integer> postorderTraversal(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        LinkedList<Integer> res = new LinkedList<>();
+        TreeNode curr = root;
+        
+        while(curr != null || !stack.empty()) {
+            if(curr != null) {
+                res.addFirst(curr.val);
+                stack.add(curr);
+                curr = curr.right;
+            } else {
+                TreeNode tmp = stack.pop();
+                curr = tmp.left;
+            }
+        }
+        return res;
+    }
+}
+```
+
+##### Date 2020.3.31
