@@ -79,4 +79,54 @@ class Solution {
 }
 ```
 
+```java
+class Solution {
+    int res = 0;
+    
+    public int findTargetSumWays(int[] nums, int S) {
+        int sumarr = 0;
+        for(int i: nums) {
+            sumarr+=i;
+        }
+        if(S > sumarr) return 0;
+        
+        dfs(nums, 0, S, 0);
+        return res;
+    }
+    
+    private void dfs(int[] nums, int i, int S, int sum) {
+        if(i == nums.length) {
+            if(sum == S) res++;
+            return;
+        }
+        dfs(nums, i + 1, S, sum + nums[i]);
+        dfs(nums, i + 1, S, sum - nums[i]);
+    }
+}
+```
+
+```java
+// pull knapsack problem
+class Solution {
+
+    public int findTargetSumWays(int[] nums, int S) {
+       int sum = 0;
+        for(int num: nums) {
+            sum += num;
+        }
+        if(sum < S || (sum + S) % 2 != 0) return 0;
+        int target = (sum + S)/2;
+        int[] dp = new int[target + 1];
+        dp[0] = 1;
+        
+        for(int num: nums) {
+            for(int j = target;j >= num;j--) {
+                dp[j] += dp[j - num];
+            }  
+        }
+        return dp[target];
+    }
+}
+```
+
 ##### Date 2020.5.2
