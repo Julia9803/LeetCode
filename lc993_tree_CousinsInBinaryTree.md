@@ -86,4 +86,35 @@ class Solution {
 }
 ```
 
+```java
+// bfs
+class Solution {
+    
+    public boolean isCousins(TreeNode root, int x, int y) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        boolean hasX = false;
+        boolean hasY = false;
+        
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            for(int i = 0;i < size;i++) {
+                TreeNode t = queue.poll();
+                if(t.val == x) hasX = true;
+                if(t.val == y) hasY = true;
+                if(t.left != null && t.right != null) {
+                    if(t.left.val == x && t.right.val == y) return false;
+                    if(t.left.val == y && t.right.val == x) return false;
+                }
+                if(t.left != null) queue.offer(t.left);
+                if(t.right != null) queue.offer(t.right);
+            }
+            if(hasX && hasY) return true;
+            else if(hasX || hasY) return false;
+        }
+        return false;
+    }
+}
+```
+
 ##### Date 2020.5.7
