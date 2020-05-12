@@ -21,7 +21,9 @@ Output:
 
 ```java
 // input [[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]
-/** List接口中的add方法有如下两种重载方式：
+/** 
+Arrays.sort(),重载排序，<0 -》正序，>0 -》逆序
+List接口中的add方法有如下两种重载方式：
         ① boolean add(E e);
         ② void add(int index, E element); // add element to index regardless of others position
 */
