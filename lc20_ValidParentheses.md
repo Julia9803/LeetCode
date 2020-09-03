@@ -1,4 +1,4 @@
-### 20. Valid Parentheses
+### 20. Valid Parentheses(Google)
 
 Given a string containing just the characters `'('`, `')'`, `'{'`, `'}'`, `'['` and `']'`, determine if the input string is valid.
 
@@ -92,3 +92,30 @@ class Solution {
 
 ##### Date 2020.2.17
 
+```java
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        char[] arr = s.toCharArray();
+        for(int i = 0;i < arr.length;i++) {
+            if((arr[i] == '(') || (arr[i] == '{') || (arr[i] == '[')) {
+                stack.push(arr[i]);
+            }
+            else if(stack.empty()) return false;
+            else if(arr[i] == ')') {
+                if(stack.pop() != '(') return false;
+            }
+            else if(arr[i] == ']') {
+                if(stack.pop() != '[') return false;
+            }
+            else if(arr[i] == '}') {
+                if(stack.pop() != '{') return false;
+            }
+        }
+        if(!stack.empty()) return false;
+        return true;
+    }
+}
+```
+
+##### Date 2020.8.27

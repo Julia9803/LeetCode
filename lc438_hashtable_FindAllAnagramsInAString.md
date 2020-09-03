@@ -1,4 +1,4 @@
-### 438. Find All Anagrams in a String
+### 438. Find All Anagrams in a String(Amazon)
 
 Given a string **s** and a **non-empty** string **p**, find all the start indices of **p**'s anagrams in **s**.
 
@@ -108,3 +108,38 @@ class Solution {
 ```
 
 ##### Date 2020.5.18
+
+```java
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> res = new ArrayList<>();
+        char[] arr1 = s.toCharArray();
+        char[] arr2 = p.toCharArray();
+        int len1 = arr1.length;
+        int len2 = arr2.length;
+        if(len1 < len2) return res;
+        
+        char[] count1 = new char[256];
+        char[] count2 = new char[256];
+        int i;
+        for(i = 0;i < len2;i++) {
+            count1[arr1[i]]++;
+            count2[arr2[i]]++;
+        }
+        if(Arrays.equals(count1, count2)) {
+            res.add(i-len2);
+        }
+        // slide window
+        for(i = len2;i < len1;i++) {
+            count1[arr1[i]]++;
+            count1[arr1[i-len2]]--;
+            if(Arrays.equals(count1, count2)) {
+                res.add(i-len2+1);
+            }
+        }
+        return res;
+    }
+}
+```
+
+##### Date 2020.8.25
